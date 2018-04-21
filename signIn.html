@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
+
+</head>
+<body>
+<div class="login-wrap">
+    <div class="content">
+        <h2>E-teach医途唇腭裂手术系统</h2>
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">登录</label>
+        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">注册</label>
+        <div class="login-form">
+            <div class="sign-in-htm">
+                <div class="group">
+                    <input type="text" class="input si-userName" placeholder="手机号">
+                    <span></span>
+                </div>
+                <div class="group">
+                    <input type="password" class="input si-password" data-type="password" placeholder="密码">
+                    <span></span>
+                </div>
+                <div class="group">
+                    <input type="submit" class="button si-submit" value="登录">
+                </div>
+                <div class="hr"></div>
+                <div class="foot-lnk">
+                    <a href="#">忘记密码</a>
+                </div>
+            </div>
+            <div class="sign-up-htm">
+                <div class="group" id="phone">
+                    <input type="text" class="input su-userName" placeholder="手机号">
+                    <button class="checkinfo">发送验证码</button>
+                    <span></span>
+                </div>
+                <div class="group">
+                    <input type="password" class="input su-password" data-type="password" placeholder="验证码">
+                    <span></span>
+                </div>
+                <div class="group">
+                    <input type="submit" class="button su-submit" value="注册">
+                </div>
+                <div class="hr"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mask"></div>
+<div class="mask-window">
+    <span class="close">×</span>
+    <div class="group">
+        <input type="text" class="input" placeholder="密码">
+    </div>
+    <div class="group">
+        <input type="submit" class="button" value="确认">
+    </div>
+</div>
+
+</body>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+
+    var si_isOk;
+    var su_isOk;
+    //登录注册表单验证
+
+    $(".si-userName").blur(function(){
+        var phone=/^1[34578]\d{9}$/;
+        if($(this).val()==""){
+            $(this).next("span").html("账号不能为空");
+            si_isOk = 1;
+        }else if(phone.test($(this))){
+            $(this).next("span").html("请输入正确的手机号码");
+            si_isOk = 1;
+        }else{
+            $(this).next("span").html("");
+        }
+    });
+
+    $(".si-password").blur(function(){
+        if($(this).val()==""){
+            $(this).next("span").html("密码名不能为空");
+            si_isOk = 1;
+        }else{
+            $(this).next("span").html("");
+        }
+    });
+
+    $(".su-userName").blur(function(){
+
+        if($(this).val()==""){
+            $(this).next("span").html("账号不能为空");
+            su_isOk = 1;
+        }else{
+            $(this).next("span").html("");
+        }
+    });
+
+    $(".su-password").blur(function(){
+        if($(this).val()==""){
+            $(this).next("span").html("验证码不能为空");
+            su_isOk = 1;
+        }else{
+            $(this).next("span").html("");
+        }
+    });
+
+
+    $(".si-submit").click(function(){
+        if(si_isOk == 1) {
+            return false;
+        }
+    });
+
+    $(".su-submit").click(function(){
+        if(su_isOk == 1){
+            return false;
+        }
+    });
+
+
+    //弹窗
+    jQuery(document).ready(function($){
+        $(".su-submit").click(function(){
+            $(".mask").fadeIn(100);
+            $(".mask-window").slideDown(200);
+        });
+
+        $(".close").click(function(){
+            $(".mask").fadeOut(100);
+            $(".mask-window").slideUp(200);
+        })
+    });
+
+
+
+
+
+</script>
+</html>
